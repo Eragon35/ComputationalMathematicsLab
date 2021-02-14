@@ -5,10 +5,10 @@ import scala.io.Source
 object ReadFromFile {
 
   def readMatrix (fileName: String): Unit = {
-    if (FileChecker.check(fileName))
+//    if (!FileChecker.check(fileName)) return
     try {
       var  total = 0
-      for (_ <- Source.fromFile(fileName)) total += 1
+      for (_ <- Source.fromFile(fileName).getLines()) total += 1
       val matrix = Array.ofDim[Float](total, total + 1)
       var counter = 0
         for (line <- Source.fromFile(fileName).getLines()) {

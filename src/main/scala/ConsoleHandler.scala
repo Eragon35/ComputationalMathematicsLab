@@ -1,6 +1,6 @@
 package main.scala
 
-import Main.matrix
+import Main.{matrix, triangleMatrix}
 
 object ConsoleHandler {
 
@@ -15,12 +15,18 @@ object ConsoleHandler {
     line.trim match {
       case "1" => ReadFromFile.readMatrix("filename")
       case "2" => ReadFromConsole.readMatrix()
-      case "3" => println(Gauss.findDeterminant(matrix.map(a => a.slice(0, a.size))))
-      case "4" => //show triangle matrix
+      case "3" => //println(Gauss.det(matrix))
+      case "4" => triangleMatrix.foreach(a => {
+        a.foreach(n => print(n + " "))
+        println()
+      })
       case "5" => //show vector of x
       case "6" => //show some bullshit
       case "exit" => sys.exit ()
-      case "show" =>
+      case "show" => matrix.foreach(a => {
+        a.foreach(n => print(n + " "))
+        println()
+      })
       case _ => println ("Какой-то ты странный, не буду с тобой работать")
       sys.exit ()
     }
