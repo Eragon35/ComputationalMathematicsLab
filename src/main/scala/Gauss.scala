@@ -1,27 +1,11 @@
 package main.scala
 
-import scala.io.StdIn
+object Gauss {
 
-object Gauss extends App {
-  val help = """1 Чтение матрицы из файла
-               |2 Ввод матрицы вручную
-               |3 Вычисление определителя
-               |4 Вывод треугольной матрицы (включая преобразованный столбец В)
-               |5 Вывод вектора неизвестных: 𝑥1,𝑥2,…,𝑥𝑛
-               |6 Вывод вектора невязок: 𝑟1,𝑟,…,𝑟𝑛""".stripMargin
-  // ask to read from file or from console
-  println(help)
-  while (true) {
-    print("\nВведи команду, милок: ")
-    ConsoleHandler.handler(StdIn.readLine())
-
+  def findDeterminant(matrix: Array[Array[Float]]):Float = {
+    if (matrix.size == 1) matrix(0)(0)
+    if (matrix.size == 2) matrix(0)(0) * matrix(1)(1) - matrix(0)(1) * matrix(1)(0)
+//      TODO: slice matrix as argument
+    else matrix(0).map(e => e * findDeterminant(matrix.slice(1, matrix.size).map(a => a.slice(1, a.size)))).sum
   }
-//  read input data
-//  check if solution exists
-//  if it exists find solution
-//  get user ability to exit or ask to show extra information
-
-
-
 }
-
