@@ -1,24 +1,32 @@
 package main.scala
 
+import scala.collection.mutable.ArrayBuffer
+
 object Gauss {
 
-  def findDeterminant(matrix: Array[Array[Float]]): Float = {
-    if (matrix.size == 1) matrix(0)(0)
-    if (matrix.size == 2) matrix(0)(0) * matrix(1)(1) - matrix(0)(1) * matrix(1)(0)
-    //      TODO: slice matrix as argument
-    else {
-      var sum = 0
-      for (i <- 0 until matrix.size){
-        if (i % 2 ==0) sum += matrix(0)(i) * findDeterminant(reduceMatrix(matrix, i))
-          else sum -= matrix(0)(i) * findDeterminant(reduceMatrix(matrix, i))
-      }
-      sum
+  def det(input: ArrayBuffer[ArrayBuffer[Float]]): Float = {
+    val matrix = input.map(_.clone())
+    var sum: Float = 0
+    if (matrix.size < 3) {
+      if (matrix.size == 1) sum += matrix(0)(0)
+      else sum += matrix(0)(0) * matrix(1)(1) - matrix(0)(1) * matrix(1)(0)
     }
+    else {
+
+      for (i <- 0 until matrix.size) {
+        val reducing = matrix.map(x => x.clone())
+        if (i % 2 == 0) sum += matrix(0)(i) * det(reduceMatrix(reducing, i))
+        else sum -= matrix(0)(i) * det(reduceMatrix(reducing, i))
+      }
+
+    }
+    sum
   }
 
   def findSolution() = {}
-  def reduceMatrix(array: Array[Array[Float]], i: Int): Array[Array[Float]] = {
-    array.drop(0)
+  def reduceMatrix(array: ArrayBuffer[ArrayBuffer[Float]], i: Int): ArrayBuffer[ArrayBuffer[Float]] = {
+    array.remove(0)
+    array.map(a => a.remove(i))
+    array
   }
-
 }

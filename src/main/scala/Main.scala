@@ -1,10 +1,12 @@
 package main.scala
 
+import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn
 
 object Main extends App {
-  var matrix = Array.ofDim[Float](1,1)
-  var triangleMatrix = Array.ofDim[Float](1,1)
+  var matrix = ArrayBuffer(ArrayBuffer(0.toFloat))
+  var triangleMatrix = ArrayBuffer(ArrayBuffer(0.toFloat))
+  //  TODO: change array to arrayBuffer
   var xVector = Array[Int](0)
   var residualVector = Array[Int](0) //вектор невязки
 
