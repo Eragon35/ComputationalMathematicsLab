@@ -6,7 +6,7 @@ object ConsoleHandler {
 
   def handler(line: String): Unit = {
     line.trim match {
-    case "1" => //file
+    case "1" => ReadFromFile.readMatrix("filename")
     case "2" => //manual read
     case "3" => //show opredelitel
     case "4" => //show triangle matrix

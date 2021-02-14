@@ -17,7 +17,7 @@ object ReadFromFile {
         }
       Option(matrix)
     } catch {
-      case e: Throwable => Console.err.println("\tProblem with parsing file to commands\n\t" + e.getMessage)
+      case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n\t" + e.getMessage)
         None
     }
   }
