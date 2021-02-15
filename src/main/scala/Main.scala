@@ -6,9 +6,8 @@ import scala.io.StdIn
 object Main extends App {
   var matrix = ArrayBuffer(ArrayBuffer(0.toFloat))
   var triangleMatrix = ArrayBuffer(ArrayBuffer(0.toFloat))
-  //  TODO: change array to arrayBuffer
-  var xVector = Array[Int](0)
-  var residualVector = Array[Int](0) //вектор невязки
+  var xVector = ArrayBuffer[Float](0)
+  var residualVector = ArrayBuffer[Float](0) //вектор невязки
 
   println(ConsoleHandler.help)
   while (true) {
@@ -17,6 +16,5 @@ object Main extends App {
   }
 //  check if solution exists
 //  if it exists find solution
-
 }
 

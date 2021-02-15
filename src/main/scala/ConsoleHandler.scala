@@ -14,11 +14,13 @@ object ConsoleHandler {
                |6 Вывод вектора невязок: 𝑟1,𝑟,…,𝑟𝑛""".stripMargin
 
   def handler(line: String): Unit = {
+//    TODO: add validation for input matrix
+//    TODO: check determinant before solving
     line.trim match {
       case "1" => ReadFromFile.readMatrix("filename")
       case "2" => ReadFromConsole.readMatrix()
       case "3" => val matrix2 = matrix.map(_.clone()) // make clone of origin matrix
-        matrix2.map(a => a.remove(matrix2.size)) // reduce B column
+        matrix2.map(a => a.remove(matrix.size)) // reduce B column
         println("Определитель = " + Gauss.det(matrix2))
       case "4" => showMatrix(triangleMatrix)
       case "5" => xVector.foreach(x => print(x + " "))
@@ -28,7 +30,6 @@ object ConsoleHandler {
       case "help" => println(help)
       case "solve" => Gauss.findSolution(matrix)
       case _ => println ("Какой-то ты странный, не буду с тобой работать")
-      sys.exit ()
     }
   }
 
