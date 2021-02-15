@@ -6,8 +6,9 @@ import scala.io.StdIn
 object ReadFromConsole {
   def readMatrix (): Unit = {
     try {
-      print("Введи число строк матрицы: ")
+      print("Введи число неизвестных: ")
       val total = StdIn.readInt()
+      Main.order = (1 to total toArray).to[ArrayBuffer]
       println("\nВведите матрицу по строкам:")
       var matrix : ArrayBuffer[ArrayBuffer[Float]] = ArrayBuffer(ArrayBuffer(0.toFloat))
       matrix.clear()

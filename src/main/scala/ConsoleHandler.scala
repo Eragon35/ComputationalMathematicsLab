@@ -16,6 +16,7 @@ object ConsoleHandler {
   def handler(line: String): Unit = {
 //    TODO: add validation for input matrix
 //    TODO: check determinant before solving
+//    TODO: add input for filename
     line.trim match {
       case "1" => ReadFromFile.readMatrix("filename")
       case "2" => ReadFromConsole.readMatrix()
@@ -28,7 +29,8 @@ object ConsoleHandler {
       case "exit" => sys.exit ()
       case "show" => showMatrix(matrix)
       case "help" => println(help)
-      case "solve" => Gauss.findSolution(matrix)
+      case "solve" => Gauss.findTriangleMatrix(matrix)
+      case "swap" => order.foreach(x => print(x + " "))
       case _ => println ("Какой-то ты странный, не буду с тобой работать")
     }
   }

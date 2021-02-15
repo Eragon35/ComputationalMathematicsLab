@@ -28,13 +28,12 @@ object Gauss {
     array
   }
 
-  def findSolution(input: ArrayBuffer[ArrayBuffer[Float]]): Unit = {
+  def findTriangleMatrix(input: ArrayBuffer[ArrayBuffer[Float]]): Unit = {
     val solutionMatrix = input.map(_.clone())
     for (i <- 0 until solutionMatrix.size-1){
       val max = solutionMatrix(i).map(x => Math.abs(x)).slice(0, solutionMatrix.size).max
       val index = solutionMatrix(i).map(x => Math.abs(x)).indexOf(max) //finding column with higher asb(element)
       swapColumns(solutionMatrix, i, index)
-
 //      println("\nBegging " + i + " max " + max)
       val originRow = solutionMatrix(i)
       solutionMatrix(i) = solutionMatrix(i).map(_ / max)
@@ -50,13 +49,20 @@ object Gauss {
     }
    triangleMatrix = solutionMatrix
   }
-
   def swapColumns(input: ArrayBuffer[ArrayBuffer[Float]], leftColumn: Int, rightColumn: Int): Unit = {
+//    TODO: add swap in main order
+    val swap = order(leftColumn)
+    order(leftColumn) = order(rightColumn)
+    order(rightColumn) = swap
 //    original was .map
     input.foreach(r => {
       val temp = r(leftColumn)
       r(leftColumn) = r(rightColumn)
       r(rightColumn) = temp
     })
+  }
+
+  def findSolution(input: ArrayBuffer[ArrayBuffer[Float]]): Unit = {
+
   }
 }

@@ -10,6 +10,7 @@ object ReadFromFile {
     try {
       var  total = 0
       for (_ <- Source.fromFile(fileName).getLines()) total += 1
+      Main.order = (1 to total toArray).to[ArrayBuffer]
       var matrix : ArrayBuffer[ArrayBuffer[Float]] = ArrayBuffer(ArrayBuffer(0.toFloat))
       matrix.clear()
       var counter = 0

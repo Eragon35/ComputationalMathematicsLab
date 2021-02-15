@@ -8,6 +8,7 @@ object Main extends App {
   var triangleMatrix = ArrayBuffer(ArrayBuffer(0.toFloat))
   var xVector = ArrayBuffer[Float](0)
   var residualVector = ArrayBuffer[Float](0) //вектор невязки
+  var order = ArrayBuffer[Int](0) //массив порядка, т.к. менются столбцы, то хn тоже меняются, нужен для вычисления вектора невязки
 
   println(ConsoleHandler.help)
   while (true) {
