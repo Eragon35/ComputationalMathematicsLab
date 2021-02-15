@@ -8,21 +8,17 @@ object FileChecker {
    * @param name name of the file
    * @return true if having some problems otherwise false
    */
-  def check(name: String): Boolean = {
+  def check(name: String): Unit = {
     if (name.isEmpty) {
-      Console.err.println("\tdude, i need a file's name")
-      return true
+      throw new Exception("\tdude, i need a file's name")
     }
     val path: Path = Paths.get(name)
     if (!Files.exists(path)){
-      Console.err.println("\tdude, file doesn't exist")
-      return true
+      throw new Exception("\tdude, file doesn't exist")
     }
     if(!Files.isReadable(path)) {
-      Console.err.println("\tdude, i can't read the file")
-      return true
+      throw new Exception("\tdude, i can't read the file")
     }
-    false
   }
 }
 

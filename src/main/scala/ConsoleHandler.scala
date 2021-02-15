@@ -30,6 +30,7 @@ object ConsoleHandler {
       case "show" => showMatrix(matrix)
       case "help" => println(help)
       case "solve" => Gauss.findTriangleMatrix(matrix)
+        Gauss.findSolution(triangleMatrix)
       case "swap" => order.foreach(x => print(x + " "))
       case _ => println ("Какой-то ты странный, не буду с тобой работать")
     }
