@@ -5,7 +5,6 @@ import scala.io.Source
 import Main._
 
 object ReadFromFile {
-
   def readMatrix (fileName: String): Unit = {
     try {
       FileChecker.check(fileName)
@@ -24,5 +23,4 @@ object ReadFromFile {
       case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n" + e.getMessage)
     }
   }
-
 }

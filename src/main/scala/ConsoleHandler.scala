@@ -29,9 +29,11 @@ object ConsoleHandler {
       case "exit" => sys.exit ()
       case "show" => showMatrix(matrix)
       case "help" => println(help)
-      case "solve" => Gauss.findTriangleMatrix(matrix)
-        Gauss.findSolution(triangleMatrix)
-      case "swap" => order.foreach(x => print(x + " "))
+      case "solve" => Gauss.findTriangleMatrix()
+        Gauss.findSolution()
+        Gauss.findResidual()
+      case "order" => order.foreach(x => print(x + " "))
+      case "origin" => showMatrix(matrix)
       case _ => println ("Какой-то ты странный, не буду с тобой работать")
     }
   }

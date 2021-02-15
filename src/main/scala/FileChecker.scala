@@ -3,11 +3,6 @@ package main.scala
 import java.nio.file.{Files, Path, Paths}
 
 object FileChecker {
-  /**
-   *
-   * @param name name of the file
-   * @return true if having some problems otherwise false
-   */
   def check(name: String): Unit = {
     if (name.isEmpty) {
       throw new Exception("\tdude, i need a file's name")

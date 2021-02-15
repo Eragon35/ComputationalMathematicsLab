@@ -27,8 +27,8 @@ object Gauss {
     array
   }
 
-  def findTriangleMatrix(input: ArrayBuffer[ArrayBuffer[Float]]): Unit = {
-    val solutionMatrix = input.map(_.clone())
+  def findTriangleMatrix(): Unit = {
+    val solutionMatrix = matrix.map(_.clone())
     for (i <- 0 until solutionMatrix.size-1){
       val max = solutionMatrix(i).map(x => Math.abs(x)).slice(0, solutionMatrix.size).max
       val index = solutionMatrix(i).map(x => Math.abs(x)).indexOf(max) //finding column with higher asb(element)
@@ -49,7 +49,6 @@ object Gauss {
     val swap = order(leftColumn)
     order(leftColumn) = order(rightColumn)
     order(rightColumn) = swap
-//    original was .map
     input.foreach(r => {
       val temp = r(leftColumn)
       r(leftColumn) = r(rightColumn)
@@ -57,11 +56,26 @@ object Gauss {
     })
   }
 
-  def findSolution(input: ArrayBuffer[ArrayBuffer[Float]]): Unit = {
-    for (i <- (0 until input.size).reverse) {
-      var sum: Float = input(i)(input.size)
-      for (j <- i+1 until input.size) sum -= input(i)(j) * xVector(j)
-      xVector(i) = sum / input(i)(i)
+  def findSolution(): Unit = {
+    for (i <- triangleMatrix.indices.reverse) {
+      var sum: Float = triangleMatrix(i)(triangleMatrix.size)
+      for (j <- i+1 until triangleMatrix.size) sum -= triangleMatrix(i)(j) * xVector(j)
+      xVector(i) = sum / triangleMatrix(i)(i) // use order(i)-1 to put answer on the right place
+    }
+    val temp = ArrayBuffer.range(0, xVector.size).map(_ => 1.toFloat)
+    for (i <-xVector.indices) temp(order(i)-1) = xVector(i)
+    xVector = temp
+  }
+
+  def findResidual(): Unit = {
+    for (i <- matrix.indices) { //lines
+      var sum: Float = 0
+      for (j <- matrix.indices) {
+        print(matrix(i)(j) + " * " +  xVector(j) + "|")
+        sum += matrix(i)(j) * xVector(j)
+      }
+      println("|" + matrix(i)(matrix.size) + " - " + sum)
+      residualVector(i) = matrix(i)(matrix.size) - sum
     }
   }
 }
