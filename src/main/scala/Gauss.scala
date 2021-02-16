@@ -46,10 +46,10 @@ object Gauss {
    triangleMatrix = solutionMatrix
   }
   def swapColumns(input: ArrayBuffer[ArrayBuffer[Float]], leftColumn: Int, rightColumn: Int): Unit = {
-    val swap = order(leftColumn)
+    val swap = order(leftColumn) // swap columns in order to save the changes
     order(leftColumn) = order(rightColumn)
     order(rightColumn) = swap
-    input.foreach(r => {
+    input.foreach(r => { // swap columns in matrix
       val temp = r(leftColumn)
       r(leftColumn) = r(rightColumn)
       r(rightColumn) = temp
@@ -62,7 +62,7 @@ object Gauss {
       for (j <- i+1 until triangleMatrix.size) sum -= triangleMatrix(i)(j) * xVector(j)
       xVector(i) = sum / triangleMatrix(i)(i) // use order(i)-1 to put answer on the right place
     }
-    val temp = ArrayBuffer.range(0, xVector.size).map(_ => 1.toFloat)
+    val temp = ArrayBuffer.range(0, xVector.size).map(_ => 1.toFloat) // return Xs on the right places
     for (i <-xVector.indices) temp(order(i)-1) = xVector(i)
     xVector = temp
   }
@@ -71,10 +71,10 @@ object Gauss {
     for (i <- matrix.indices) { //lines
       var sum: Float = 0
       for (j <- matrix.indices) {
-        print(matrix(i)(j) + " * " +  xVector(j) + "|")
+//        print(matrix(i)(j) + " * " +  xVector(j) + "|")
         sum += matrix(i)(j) * xVector(j)
       }
-      println("|" + matrix(i)(matrix.size) + " - " + sum)
+//      println("|" + matrix(i)(matrix.size) + " - " + sum)
       residualVector(i) = matrix(i)(matrix.size) - sum
     }
   }

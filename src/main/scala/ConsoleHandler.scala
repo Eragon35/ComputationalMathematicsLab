@@ -3,6 +3,7 @@ package main.scala
 import Main._
 
 import scala.collection.mutable.ArrayBuffer
+import scala.io.StdIn
 
 object ConsoleHandler {
 
@@ -14,27 +15,19 @@ object ConsoleHandler {
                |6 Вывод вектора невязок: 𝑟1,𝑟,…,𝑟𝑛""".stripMargin
 
   def handler(line: String): Unit = {
-//    TODO: add validation for input matrix
-//    TODO: check determinant before solving
-//    TODO: add input for filename
     line.trim match {
-      case "1" => ReadFromFile.readMatrix("filename")
+      case "1" => print("\nВведите имя файла: ")
+        ReadFromFile.readMatrix(StdIn.readLine().trim)  // "filename"
       case "2" => ReadFromConsole.readMatrix()
-      case "3" => val matrix2 = matrix.map(_.clone()) // make clone of origin matrix
-        matrix2.map(a => a.remove(matrix.size)) // reduce B column
-        println("Определитель = " + Gauss.det(matrix2))
+      case "3" => print(determinant)
       case "4" => showMatrix(triangleMatrix)
       case "5" => xVector.foreach(x => print(x + " "))
       case "6" => residualVector.foreach(x => print(x + " "))
       case "exit" => sys.exit ()
-      case "show" => showMatrix(matrix)
       case "help" => println(help)
-      case "solve" => Gauss.findTriangleMatrix()
-        Gauss.findSolution()
-        Gauss.findResidual()
       case "order" => order.foreach(x => print(x + " "))
       case "origin" => showMatrix(matrix)
-      case _ => println ("Какой-то ты странный, не буду с тобой работать")
+      case _ => print("Извините простите вы не так поняли я сейчас объясню простите давайте уважать друг друга и дружить")
     }
   }
 

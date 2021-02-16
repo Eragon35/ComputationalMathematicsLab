@@ -7,18 +7,14 @@ import Main._
 object ReadFromFile {
   def readMatrix (fileName: String): Unit = {
     try {
+      val source = Source.fromFile(fileName)
       FileChecker.check(fileName)
-      var  total = 0
-      for (_ <- Source.fromFile(fileName).getLines()) total += 1
-      initializer(total)
       var matrix : ArrayBuffer[ArrayBuffer[Float]] = ArrayBuffer(ArrayBuffer(0.toFloat))
       matrix.clear()
-      var counter = 0
-        for (line <- Source.fromFile(fileName).getLines()) {
-          matrix += line.split(" ").map(x => x.toFloat).to[ArrayBuffer]
-          counter += 1
-        }
+      for (line <- source.getLines()) matrix += line.split(" ").map(x => x.toFloat).to[ArrayBuffer]
       Main.matrix = matrix
+      initializer(matrix.size)
+      source.close()
     } catch {
       case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n" + e.getMessage)
     }
