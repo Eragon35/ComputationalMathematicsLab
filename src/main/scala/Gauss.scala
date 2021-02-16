@@ -30,11 +30,12 @@ object Gauss {
   def findTriangleMatrix(): Unit = {
     val solutionMatrix = matrix.map(_.clone())
     for (i <- 0 until solutionMatrix.size-1){
-      val max = solutionMatrix(i).map(x => Math.abs(x)).slice(0, solutionMatrix.size).max
-      val index = solutionMatrix(i).map(x => Math.abs(x)).indexOf(max) //finding column with higher asb(element)
+      val max = solutionMatrix(i).map(x => Math.abs(x)).slice(i, solutionMatrix.size).max
+      val index = solutionMatrix(i).map(x => Math.abs(x)).indexOf(max) //finding column with higher abs(element)
       swapColumns(solutionMatrix, i, index)
       val originRow = solutionMatrix(i)
-      solutionMatrix(i) = solutionMatrix(i).map(_ / max)
+      if (solutionMatrix(i)(i) > 0) solutionMatrix(i) = solutionMatrix(i).map(_ / max)
+      else solutionMatrix(i) = solutionMatrix(i).map(_ / -max)
       for (j <- i+1 until solutionMatrix.size){
         val multiply = solutionMatrix(j)(i)
         for (k <- i to solutionMatrix.size){
@@ -43,6 +44,7 @@ object Gauss {
       }
       solutionMatrix(i) = originRow
     }
+
    triangleMatrix = solutionMatrix
   }
   def swapColumns(input: ArrayBuffer[ArrayBuffer[Float]], leftColumn: Int, rightColumn: Int): Unit = {

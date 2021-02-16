@@ -1,6 +1,7 @@
 package main.scala
 
 import Main._
+import _root_.main.scala.Gauss._
 
 import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn
@@ -23,10 +24,16 @@ object ConsoleHandler {
       case "4" => showMatrix(triangleMatrix)
       case "5" => xVector.foreach(x => print(x + " "))
       case "6" => residualVector.foreach(x => print(x + " "))
+      case "7" => print("\nВведите имя файла: ")
+        ReadFromFile.readParam(StdIn.readLine().trim)  // "filename"
+      case "8" => ReadFromConsole.readParam()
       case "exit" => sys.exit ()
       case "help" => println(help)
       case "order" => order.foreach(x => print(x + " "))
       case "origin" => showMatrix(matrix)
+      case "solve" => findTriangleMatrix()
+        findSolution()
+        findResidual()
       case _ => print("Извините простите вы не так поняли я сейчас объясню простите давайте уважать друг друга и дружить")
     }
   }

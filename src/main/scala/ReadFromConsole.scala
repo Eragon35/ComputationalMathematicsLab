@@ -20,4 +20,16 @@ object ReadFromConsole {
       case e: Throwable => Console.err.println("\tProblem with parsing lines to matrix\n\t" + e.getMessage)
     }
   }
+
+  def readParam(): Unit = {
+    // строки и столбцы начинаются с 1
+    print("Введи строку для изменения: ")
+    val x = StdIn.readInt()
+    print("Введи столбец для изменения: ")
+    val y = StdIn.readInt()
+    print("Введи новое значение коэффицента: ")
+    val k = StdIn.readInt()
+    matrix(x-1)(y-1) = k
+    initializer(matrix.size)
+  }
 }

@@ -19,4 +19,19 @@ object ReadFromFile {
       case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n" + e.getMessage)
     }
   }
+
+  def readParam(fileName: String): Unit = {
+    try {
+      val source = Source.fromFile(fileName)
+      FileChecker.check(fileName)
+      var param = ArrayBuffer[Float](0)
+      param.clear()
+      for (line <- source.getLines()) param += line.toFloat
+      matrix(param(0).toInt-1)(param(1).toInt-1) = param(2)
+      initializer(matrix.size)
+      source.close()
+    } catch {
+      case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n" + e.getMessage)
+    }
+  }
 }
