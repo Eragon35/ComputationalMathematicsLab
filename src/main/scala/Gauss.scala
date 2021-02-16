@@ -35,19 +35,19 @@ object Gauss {
       swapColumns(solutionMatrix, i, index)
       val originRow = solutionMatrix(i)
       if (solutionMatrix(i)(i) > 0) solutionMatrix(i) = solutionMatrix(i).map(_ / max)
-      else solutionMatrix(i) = solutionMatrix(i).map(_ / -max)
+      else solutionMatrix(i) = solutionMatrix(i).map(_ / -max) //to be honest doesn't know why abs(max) not working
       for (j <- i+1 until solutionMatrix.size){
         val multiply = solutionMatrix(j)(i)
-        for (k <- i to solutionMatrix.size){
-          solutionMatrix(j)(k) = solutionMatrix(j)(k) - multiply * solutionMatrix(i)(k)
-        }
+        for (k <- i to solutionMatrix.size) solutionMatrix(j)(k) = solutionMatrix(j)(k) - multiply * solutionMatrix(i)(k)
       }
       solutionMatrix(i) = originRow
+      ConsoleHandler.showMatrix(solutionMatrix)
+      println("---------------------------------------------------------------------------------------")
     }
-
    triangleMatrix = solutionMatrix
   }
   def swapColumns(input: ArrayBuffer[ArrayBuffer[Float]], leftColumn: Int, rightColumn: Int): Unit = {
+    swapCounter += 1
     val swap = order(leftColumn) // swap columns in order to save the changes
     order(leftColumn) = order(rightColumn)
     order(rightColumn) = swap
@@ -70,13 +70,11 @@ object Gauss {
   }
 
   def findResidual(): Unit = {
-    for (i <- matrix.indices) { //lines
+    for (i <- matrix.indices) {
       var sum: Float = 0
       for (j <- matrix.indices) {
-//        print(matrix(i)(j) + " * " +  xVector(j) + "|")
         sum += matrix(i)(j) * xVector(j)
       }
-//      println("|" + matrix(i)(matrix.size) + " - " + sum)
       residualVector(i) = matrix(i)(matrix.size) - sum
     }
   }

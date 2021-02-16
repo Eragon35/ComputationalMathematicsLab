@@ -17,13 +17,14 @@ object ReadFromConsole {
       Main.matrix = matrix
       initializer(total)
     } catch {
-      case e: Throwable => Console.err.println("\tProblem with parsing lines to matrix\n\t" + e.getMessage)
+      case e: Throwable =>
+        Console.err.println("\tProblem with parsing lines to matrix\n\t" + e.getMessage)
+        e.printStackTrace()
     }
   }
 
   def readParam(): Unit = {
-    // строки и столбцы начинаются с 1
-    print("Введи строку для изменения: ")
+    print("Введи строку для изменения: ") // строки и столбцы начинаются с 1
     val x = StdIn.readInt()
     print("Введи столбец для изменения: ")
     val y = StdIn.readInt()

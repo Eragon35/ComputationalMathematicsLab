@@ -16,7 +16,8 @@ object ReadFromFile {
       initializer(matrix.size)
       source.close()
     } catch {
-      case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n" + e.getMessage)
+      case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n\t" + e.getMessage)
+        e.printStackTrace()
     }
   }
 
@@ -31,7 +32,8 @@ object ReadFromFile {
       initializer(matrix.size)
       source.close()
     } catch {
-      case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n" + e.getMessage)
+      case e: Throwable => Console.err.println("\tProblem with parsing file to matrix\n\t" + e.getMessage)
+        e.printStackTrace()
     }
   }
 }
